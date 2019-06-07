@@ -128,64 +128,36 @@ def sliding_maximum(k, array)
     result = []
     imp_els = Deque.new
 
-    puts "first loop"                                                   #debug
     array[0 ... k].each do |item|
         i = item[0]
         val = item[1]
-        puts "#{i}: #{val}"                                             #debug
-    
+        
         unless imp_els.empty?
-            puts "loop 1 step 1 : D: #{imp_els}"                        #debug
             while !imp_els.empty? and imp_els.get_back < val
-                puts "Back: #{imp_els.get_back} and new value: #{val}"  #debug
-                el = imp_els.pop_back
-                puts "popped #{el}; D: #{imp_els}"                      #debug
+                imp_els.pop_back
             end
-            if imp_els.empty?                                           #debug
-                puts "D empty"                                          #debug
-            else                                                        #debug
-                puts "Back: #{imp_els.get_back} and new value: #{val}"  #debug
-            end                                                         #debug
         end
     
         imp_els.push_back(Node.new(i, val))
-        puts "loop 1 step 2 : D: #{imp_els}"                            #debug
     end
 
-    puts "second loop"
     array[k ... array.length].each do |item|
         i = item[0]
         val = item[1]
-        puts "#{i}: #{val}"                                             #debug
-    
+        
         result << imp_els.get_front
-        puts "loop 2 step 1: Result: #{result}"                         #debug
-    
-        puts "loop 2 step 2: window between #{(i - k + 1)} and #{i}"    #debug
+        
         while !imp_els.empty? and !((i - k + 1) .. i).include?(imp_els.front.index)
-            puts "D front index is #{imp_els.front.index}"              #debug
-            el = imp_els.pop_front
-            puts "Popped #{el}"                                         #debug
+            imp_els.pop_front
         end
-        puts "D: #{imp_els}"                                            #debug
-    
-        puts "loop 2 step 3:"
+        
         while !imp_els.empty? and imp_els.back.value < val
-            puts "Back: #{imp_els.get_back} and new value: #{val}"      #debug
-            el = imp_els.pop_back
-            puts "popped #{el}"                                         #debug
+            imp_els.pop_back
         end
-        if imp_els.empty?                                               #debug
-            puts "D empty"                                              #debug
-        else                                                            #debug
-            puts "Back: #{imp_els.get_back} and new value: #{val}"      #debug
-        end                                                             #debug
-    
+        
         imp_els.push_back(Node.new(i, val))
-        puts "loop 2 step 4: D: #{imp_els}"                             #debug
     end
     
-    puts "After loop 2: D: #{imp_els}"                                  #debug
     result << imp_els.get_front
     
     return result

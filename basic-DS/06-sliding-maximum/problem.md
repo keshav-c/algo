@@ -15,9 +15,9 @@ This is an example of a test case:
 
 The first argument is `k`, which is `3` in this case. The output is the largest number for each group of 3 numbers in the list:
 
-3 numbers | Largest
----------------------------------
-1 3 5          | 5
-3 5 7          | 7 
-5 7 9          | 9 
-7 9 2          | 9
+| 3 numbers | Largest |
+| --------- | ------- |
+| 1 3 5     | 5       |
+| 3 5 7     | 7       | 
+| 5 7 9     | 9       | 
+| 7 9 2     | 9       |
