@@ -147,7 +147,7 @@ def sliding_maximum(k, array)
         
         result << imp_els.get_front
         
-        while !imp_els.empty? and !((i - k + 1) .. i).include?(imp_els.front.index)
+        while !imp_els.empty? and !((i - k + 1) .. i) === (imp_els.front.index)
             imp_els.pop_front
         end
         
