@@ -1,9 +1,8 @@
 def transpose(string)
-    result = string.split("").join
-    while result.match? /gn/
-        result.gsub!(/gn/, "ng")
+    while string.match? /gn/
+        string.gsub!(/gn/, "ng")
     end
-    return result
+    string
 end
 
 puts transpose('he was searchign on Bign for signign kigns')
