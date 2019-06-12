@@ -5,15 +5,11 @@ def transpose(string)
     array.each_with_index do |c, i|
       if c == "n"
         deque.unshift(c)
-        # puts "Position #{i}, Char #{c}: D: #{deque}" 
       elsif c == "g"
         deque.push(c)
-        # puts "Position #{i}, Char #{c}: D: #{deque}" 
       else
         result += deque + [c]
         deque = []
-        # puts "Position #{i}, Char #{c}: D: #{deque}"
-        # puts "Result: #{result}"
       end
     end
     result += deque unless deque.empty?
