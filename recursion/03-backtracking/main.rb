@@ -7,33 +7,26 @@ def all_but_i(array, index)
 end
 
 def exact_sum?(k, coins)
-    result = coins.each_with_index.map do |coin, i|
+    result = coins.each_with_index do |coin, i|
         remaining = all_but_i(coins, i)
-        puts "Coin: #{coin}; Remaining: [#{remaining.join(", ")}]"
-        if remaining.empty?
-            puts "Returning #{k == coin}"
-            k == coin
+        puts "Sum: #{k}; Coins: [#{coin} | #{remaining.join(", ")}]"
+        if k == coin
+            puts "Sum(#{k}) == Coin(#{coin}); Returning true"
+            return true
+        elsif k > coin and !remaining.empty?
+            return true if exact_sum?((k - coin), remaining)
         else
-            if k == coin
-                puts "returning #{k == coin}"
-                true
-            elsif k > coin
-                puts "returning exact_sum?(#{k-coin},[#{remaining.join(", ")}])"
-                exact_sum?((k - coin), remaining)
-            else
-                puts "returning false"
-                false
-            end
+            next
         end
     end
-    puts "result..."
-    result.any?
+    puts "Sum: #{k}; Returning false"
+    false
 end
 
-# puts exact_sum?(12, [1, 2, 3, 4, 5])
+puts exact_sum?(12, [1, 2, 3, 4, 5])
 # => true
-
-# puts exact_sum?(11, [1, 5, 9, 13])
+puts "------------------------------------"
+puts exact_sum?(11, [1, 5, 9, 13])
 # => false
-
-puts exact_sum?(35, [1,7,3,4,2,5])
+puts "------------------------------------"
+puts exact_sum?(15, [1,7,2,6,3,4,8])
