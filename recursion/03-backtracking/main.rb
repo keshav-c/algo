@@ -9,9 +9,7 @@ end
 def exact_sum?(k, coins)
     result = coins.each_with_index do |coin, i|
         remaining = all_but_i(coins, i)
-        puts "Sum: #{k}; Coins: [#{coin} | #{remaining.join(", ")}]"
         if k == coin
-            puts "Sum(#{k}) == Coin(#{coin}); Returning true"
             return true
         elsif k > coin and !remaining.empty?
             return true if exact_sum?((k - coin), remaining)
@@ -19,7 +17,6 @@ def exact_sum?(k, coins)
             next
         end
     end
-    puts "Sum: #{k}; Returning false"
     false
 end
 
