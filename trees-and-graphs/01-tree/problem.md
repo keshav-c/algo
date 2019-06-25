@@ -28,3 +28,54 @@ Tip: A number located at position i in an array will have it's left child locate
     # => 11
 
 Go down the left-hand side of the tree to get the sum: `2+7+2 = 11`. You can take a look at the image of the tree above.
+
+## Creating a Tree
+
+To implement a Tree, we'll create a Node class. It will store an integer of Data, and point to 2 child Nodes. 
+
+    class Node
+        attr_reader :data
+        attr_accessor :left, :right
+
+        def initialize(data)
+            @data = data
+        end
+    end
+
+The following code shows a recursive algorithm to create a tree data structure, given an array, and the position of the node in the array. The logic used is, for a node in the i<sup>th</sup> position in the array, it's `left` child is at the `2i + 1` position, and the `right` child is at the `2i + 2` position. Also, the array elements with value `0` are nil elements. I have, however, used a queue and a loop to create the desrialize the tree from the given array. 
+
+    def array_to_tree(array, i)
+        return nil if i >= array.length || array[i] == 0
+
+        node = Node.new(array[i])
+        node.left = array_to_tree(array, 2*i+1)
+        node.right = array_to_tree(array, 2*i+2)
+
+        node
+    end
+
+**Note**: Also from my source code, the above bit seems to be missing logic for `nil` elements, whose children are also recorded as `nil` elements in the array. So it can't be used without that correction.
+
+## Traversing a Tree in Pre-order
+
+Pre-order traversal means you process a Node and then process its sub-trees. 
+
+    def pre_order(node)
+        if node == nil
+            return ''
+        end
+        # Process node data
+        # call pre_order(node.left)
+        # call pre_order(node.right)
+    end
+ 
+## Challenge
+
+You will be given an array as input, which represents a Tree. Process the array into a Tree of Nodes. Then go through the tree and print it in post-order. Print each number space-separated.
+
+### Example test case
+
+    tree = array_to_tree([10, 1, 2, 3, 4, 5, 6])
+
+    puts post_order(tree)
+    #=> 3 4 1 5 6 2 10
