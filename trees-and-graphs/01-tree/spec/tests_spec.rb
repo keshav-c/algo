@@ -1,4 +1,4 @@
-require './breadth-first-des'
+require './main'
 
 describe "#Tree Deserialization and routines on unflatenned tree" do
     context "#leftmost_nodes_sum" do
