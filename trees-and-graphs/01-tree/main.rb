@@ -1,4 +1,5 @@
 require_relative 'tree'
+require_relative 'binary_search_tree'
 
 def leftmost_nodes_sum(array)
     tree = Tree.new(array)
@@ -21,5 +22,12 @@ def post_order(array)
     tree = Tree.new(array)
     res = []
     tree.post_order(tree.root) { |i| res << i.data }
+    res
+end
+
+def bst_pre_order(array)
+    tree = BinarySearchTree.new(array)
+    res = []
+    tree.pre_order(tree.root) { |i| res << i.data }
     res
 end
