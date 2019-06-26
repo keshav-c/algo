@@ -4,11 +4,11 @@ To store a Binary Tree in an Array, we just need to determine the order that we 
 
 Here's a tree represented as an array:
 
-![Tree as Array](./ar2tree.png)
+![Tree as Array](./images/ar2tree.png)
 
 And this is the tree _unfolded_:
 
-![Tree](./tree.png)
+![Tree](./images/tree.png)
 
 Notice that `5` only has one child Node, so the other child is represented as `0` in the above array. This is OK as long as we don't need to store  actual `0` values.
 

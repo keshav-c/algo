@@ -1,5 +1,4 @@
 require_relative 'tree'
-require_relative 'node'
 
 def leftmost_nodes_sum(array)
     tree = Tree.new(array)
