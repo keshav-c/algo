@@ -23,9 +23,7 @@ This shows the connections between nodes `0` and `2`, nodes `1` and `4`, etc.
 
 ## Challenge
 
-You will be given lists of numbers as input based on the above format. Then start from Node `0` and repeatedly visit the next connected node until you reach Node `4`. You need to return an array with all the nodes visited.
-
-While Nodes don't necessarily have a set order for their connections, in this challenge you should go to the _first_ Node in the list of input. For example, in the above graph, go from `0` to `2` to `5` to `4` and then stop.
+You will be given lists of numbers as input based on the above format. Then start from any Node and repeatedly visit the connected nodes until you reach the destination node. You need to return an array with all the nodes visited.
 
 ## Example
 
@@ -40,5 +38,3 @@ While Nodes don't necessarily have a set order for their connections, in this ch
 
     p graph(hash)
     # => [0, 2, 5, 4]
-
-The test cases for the above program require us to visit the first node, in the list of connections to each node, recursively in order to determine the path.
