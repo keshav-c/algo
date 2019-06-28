@@ -16,3 +16,22 @@ def visit(hash, path, dest)
         false
     end
 end
+
+def breadth_first_search(graph)
+    queue = [0]
+    visited = Array.new(graph.size, false)
+    until queue.empty? do
+        removed = queue.shift
+        unless visited[removed]
+            graph[removed].each { |n| queue << n }
+            yield(removed) if block_given?
+            visited[removed] = true
+        end
+    end
+end
+
+def bfs_caller(graph)
+    res = []
+    breadth_first_search(graph) { |i| res << i }
+    res
+end
