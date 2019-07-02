@@ -24,6 +24,10 @@ describe "Tree Deserialization and routines on unflatenned tree" do
             array = [5, 3, 2, 9, 0, 0, 7, 0, 0, 0, 0, 0, 0, 5, 0]
             expect(tree_height(array)).to eql 4
         end
+        it "passes test 4" do
+            array = [1, 2, 3, 4, 0, 5, 6, 7, 8, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0]
+            expect(tree_height(array)).to eql 5
+        end
     end
     context "#pre_order" do
         it "passes test 1" do
