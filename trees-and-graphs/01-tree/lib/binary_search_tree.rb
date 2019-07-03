@@ -24,8 +24,4 @@ class BinarySearchTree < Tree
             end
         end
     end
-
-    def is_search_tree?
-        true
-    end
 end

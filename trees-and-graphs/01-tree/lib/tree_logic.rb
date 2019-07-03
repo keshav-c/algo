@@ -34,4 +34,18 @@ module TreeLogic
             proc.call(node)
         end
     end
+
+    def is_bst?
+        def in_range(node, range_min, range_max)
+            return true if node.nil?
+            if node.data >= range_min and node.data <= range_max
+                left_in_range = in_range(node.left, range_min, node.data)
+                right_in_range = in_range(node.right, node.data, range_max)
+                left_in_range and right_in_range
+            else
+                false
+            end
+        end
+        in_range(root, -Float::INFINITY, Float::INFINITY)
+    end
 end
