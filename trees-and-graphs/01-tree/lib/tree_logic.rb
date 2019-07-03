@@ -1,6 +1,10 @@
 module TreeLogic
-    def sum_left(node)
-        node.nil? ? 0 : node.data + sum_left(node.left)
+    def sum_left_from(node)
+        node.nil? ? 0 : node.data + sum_left_from(node.left)
+    end
+
+    def leftmost_sum
+        sum_left_from(root)
     end
 
     def height_from(node)
@@ -9,6 +13,10 @@ module TreeLogic
         else
             1 + [height_from(node.left), height_from(node.right)].max
         end
+    end
+
+    def max_height
+        height_from(root)
     end
 
     def pre_order(node, &proc)

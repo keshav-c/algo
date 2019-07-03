@@ -6,6 +6,11 @@ class BinarySearchTree
 
     attr_reader :root
 
+    def initialize(array)
+        @root = Node.new(array[0])
+        array[1..-1].each { |el| insert(Node.new(el)) }
+    end
+    
     def insert(node, position = self.root)
         if position.data > node.data
             if position.left.nil?
@@ -22,8 +27,7 @@ class BinarySearchTree
         end
     end
 
-    def initialize(array)
-        @root = Node.new(array[0])
-        array[1..-1].each { |el| insert(Node.new(el)) }
+    def is_search_tree?
+        true
     end
 end

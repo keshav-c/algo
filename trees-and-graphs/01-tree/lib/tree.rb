@@ -6,11 +6,11 @@ class Tree
 
     attr_reader :root
 
-    def assign_node(val)
-        (val.nil? or val.zero?) ? nil : Node.new(val)
-    end
-
     def initialize(array)
+        def assign_node(val)
+            (val.nil? or val.zero?) ? nil : Node.new(val)
+        end
+
         @root = Node.new(array[0])
         queue = [@root]
         idx = 0
