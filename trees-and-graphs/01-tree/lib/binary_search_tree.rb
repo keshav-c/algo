@@ -1,9 +1,7 @@
 require_relative 'node'
-require_relative 'tree_logic'
+require_relative 'tree'
 
-class BinarySearchTree
-    include TreeLogic
-
+class BinarySearchTree < Tree
     attr_reader :root
 
     def initialize(array)
