@@ -35,7 +35,7 @@ module TreeLogic
         end
     end
 
-    def is_bst?
+    def bst?
         def in_range(node, range_min, range_max)
             return true if node.nil?
             if node.data >= range_min and node.data <= range_max
@@ -47,5 +47,19 @@ module TreeLogic
             end
         end
         in_range(root, -Float::INFINITY, Float::INFINITY)
+    end
+
+    def balanced?
+        def balanced_and_height (node)
+            return {ht: 0, bal?: true} if node.nil?
+            left = balanced_and_height(node.left)
+            right = balanced_and_height(node.right)
+            return {bal?: false} unless left[:bal?] and right[:bal?]
+            res = {}
+            res[:bal?] =  (left[:ht] - right[:ht]).abs <= 1
+            res[:ht] = 1 + [left[:ht], right[:ht]].max if res[:bal?]
+            res
+        end
+        balanced_and_height(root)[:bal?]
     end
 end

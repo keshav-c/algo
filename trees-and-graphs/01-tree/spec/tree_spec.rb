@@ -96,31 +96,68 @@ describe Tree do
             expect(res).to eql [3, 7, 2, 5, 11, 6, 7, 4, 9, 5, 1]
         end
     end
-    context "#is_bst?" do
+    context "#bst?" do
         it "passes test 1" do
             array = [20, 10, 27, 12, 14, 23, 30]
             tree = Tree.new(array)
-            expect(tree.is_bst?).to eql false
+            expect(tree.bst?).to eql false
         end
         it "passes test 2" do
             array = [19, 9, 26, 4, 13, 17, 29]
             tree = Tree.new(array)
-            expect(tree.is_bst?).to eql false
+            expect(tree.bst?).to eql false
         end
         it "passes test 3" do
             array = [20, 10, 27, 5, 14, 23, 30]
             tree = Tree.new(array)
-            expect(tree.is_bst?).to eql true
+            expect(tree.bst?).to eql true
         end
         it "passes test 4" do
             array = [20, 10, 27, 5, 14, 23, 30, 0, 12, 0, 0, 0, 0, 0, 0]
             tree = Tree.new(array)
-            expect(tree.is_bst?).to eql false
+            expect(tree.bst?).to eql false
         end
         it "passes test 5" do
             array = [21, 11, 26, 5, 14, 23, 30, 2, 8, 13, 16, 0, 0, 0, 0]
             tree = Tree.new(array)
-            expect(tree.is_bst?).to eql true
+            expect(tree.bst?).to eql true
+        end
+    end
+    context "#balanced?" do
+        it "passes test 1" do
+            array = [1, 2, 3, 4, 0, 0, 5, 6, 0, 0, 0, 0, 0, 0, 7]
+            tree = Tree.new(array)
+            expect(tree.balanced?).to eql false
+        end
+        it "passes test 2" do
+            array = [1, 2, 3, 0, 0, 4, 5, 0, 0, 0, 0, 6, 0, 7, 8]
+            tree = Tree.new(array)
+            expect(tree.balanced?).to eql false
+        end
+        it "passes test 3" do
+            array = [1, 2, 3, 4, 5, 0, 0]
+            tree = Tree.new(array)
+            expect(tree.balanced?).to eql true
+        end
+        it "passes test 4" do
+            array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 0, 0, 10, 0, 0]
+            tree = Tree.new(array)
+            expect(tree.balanced?).to eql true
+        end
+        it "passes test 5" do
+            array = [1, 2, 3]
+            tree = Tree.new(array)
+            expect(tree.balanced?).to eql true
+        end
+        it "passes test 6" do
+            array = [1, 0, 2]
+            tree = Tree.new(array)
+            expect(tree.balanced?).to eql true
+        end
+        it "passes test 7" do
+            array = [1, 2, 0, 3, 0, 0, 0]
+            tree = Tree.new(array)
+            expect(tree.balanced?).to eql false
         end
     end
 end
