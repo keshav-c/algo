@@ -82,4 +82,23 @@ class Graph
     end
     components
   end
+
+  def has_cycle?
+    def dfs_no_track_visited(node, prev, &proc)
+      yield node if block_given?
+      node.neighbours.each do |next_node|
+        dfs_no_track_visited(next_node, node, &proc) unless next_node == prev
+      end
+    end
+    visited = Array.new(vertices.size, false)
+    until visited.all?
+      prev = nil
+      dfs_no_track_visited(vertices[0], prev) do |node|
+        return true if node != prev && visited[node.data]
+        visited[node.data] = true
+        prev = node
+      end
+    end
+    false
+  end
 end

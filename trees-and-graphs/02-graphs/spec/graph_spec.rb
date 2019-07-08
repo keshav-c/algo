@@ -68,7 +68,7 @@ describe Graph do
       expect(res).to eql [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
     end
   end
-  context '#depth_first_search' do
+  context 'Depth First Search order' do
     it 'returns array in DFS form' do
       hash = { 0 => [2], 1 => [4], 2 => [5, 0, 3], 3 => [2], 4 => [1, 5],
                5 => [4, 2] }
@@ -82,7 +82,7 @@ describe Graph do
       expect(dfs_wrapper(hash, 0)).to eql [0, 1, 4, 10, 11, 5, 2, 6, 13, 12, 3, 7, 14, 8, 9]
     end
   end
-  context "fully_connected?" do
+  context "all nodes connected?" do
     it "finds more than 1 connected component in graph" do
       hash = { 0 => [1], 1 => [0, 3, 4], 2 => [5, 6], 3 => [1], 4 => [1], 
                5 => [2], 6 => [2] }
@@ -101,6 +101,22 @@ describe Graph do
       hash = { 0 => [1, 2], 1 => [0, 4], 2 => [0, 4], 3 => [5, 6], 
                4 => [1, 2, 7], 5 => [3], 6 => [3], 7 => [4] }
       expect(connected_wrapper(hash)).to eql false
+    end
+  end
+  context "#has_cycle?" do
+    it "Finds cycle in given graph" do
+      hash = { 0 => [1, 2], 1 => [0, 2], 2 => [0, 1, 3, 4, 5], 3 => [2, 4], 
+               4 => [3, 2], 5 => [2] }
+      expect(Graph.new(hash).has_cycle?).to eql true
+    end
+    it "found no cycle in given graph" do
+      hash = { 0 => [1, 2], 1 => [0, 3, 4], 2 => [0, 5, 6], 3 => [1], 4 => [1],          5 => [2], 6 => [2] } 
+      expect(Graph.new(hash).has_cycle?).to eql false
+    end
+    it "found no cycle in given graph" do
+      hash = { 0 => [2], 1 => [4, 3], 2 => [0, 5], 3 => [5, 1], 4 => [1], 
+               5 => [2, 3] }
+      expect(Graph.new(hash).has_cycle?).to eql false
     end
   end
 end
