@@ -3,6 +3,20 @@
 require './lib/graph'
 
 describe Graph do
+  def dfs_wrapper(hash, start)
+    graph = Graph.new(hash)
+    start_vertex = graph.vertices[start]
+    visited = Array.new(graph.vertices.size, false)
+    res = []
+    graph.depth_first_search(start_vertex, visited) { |node| res << node.data }
+    res
+  end
+
+  def connected_wrapper(hash)
+    graph = Graph.new(hash)
+    graph.connected_components.length == 1
+  end
+
   context '#get_path' do
     it 'finds a path' do
       hash = { 0 => [2], 1 => [4], 2 => [5, 0, 3], 3 => [2],
@@ -58,18 +72,35 @@ describe Graph do
     it 'returns array in DFS form' do
       hash = { 0 => [2], 1 => [4], 2 => [5, 0, 3], 3 => [2], 4 => [1, 5],
                5 => [4, 2] }
-      res = []
-      Graph.new(hash).depth_first_search(0) { |n| res << n.data }
-      expect(res).to eql [0, 2, 5, 4, 1, 3]
+      expect(dfs_wrapper(hash, 0)).to eql [0, 2, 5, 4, 1, 3]
     end
     it 'returns array in DFS form' do
       hash = { 0 => [1, 2, 3], 1 => [0, 4, 5], 2 => [0, 5, 6],
                3 => [0, 7, 8, 9], 4 => [1, 10, 11], 5 => [1, 2, 12],
                6 => [2, 13], 7 => [3, 14], 8 => [3], 9 => [3], 10 => [4],
                11 => [4], 12 => [5], 13 => [6], 14 => [7] }
-      res = []
-      Graph.new(hash).depth_first_search(0) { |n| res << n.data }
-      expect(res).to eql [0, 1, 4, 10, 11, 5, 2, 6, 13, 12, 3, 7, 14, 8, 9]
+      expect(dfs_wrapper(hash, 0)).to eql [0, 1, 4, 10, 11, 5, 2, 6, 13, 12, 3, 7, 14, 8, 9]
+    end
+  end
+  context "fully_connected?" do
+    it "finds more than 1 connected component in graph" do
+      hash = { 0 => [1], 1 => [0, 3, 4], 2 => [5, 6], 3 => [1], 4 => [1], 
+               5 => [2], 6 => [2] }
+      expect(connected_wrapper(hash)).to eql false
+    end
+    it "finds only 1 connected component in graph" do
+      hash = { 0 => [1, 2], 1 => [0, 3, 4], 2 => [0, 5, 6], 3 => [1], 4 => [1],          5 => [2], 6 => [2] }
+      expect(connected_wrapper(hash)).to eql true
+    end
+    it "finds more than 1 connected component in graph" do
+      hash = { 0 => [2], 1 => [4], 2 => [0], 3 => [5], 4 => [5, 1],
+               5 => [4, 3] }
+      expect(connected_wrapper(hash)).to eql false
+    end
+    it "finds more than 1 connected component in graph" do
+      hash = { 0 => [1, 2], 1 => [0, 4], 2 => [0, 4], 3 => [5, 6], 
+               4 => [1, 2, 7], 5 => [3], 6 => [3], 7 => [4] }
+      expect(connected_wrapper(hash)).to eql false
     end
   end
 end

@@ -57,17 +57,29 @@ class Graph
     end
   end
 
-  def depth_first_search(start, &proc)
-    def search(node, visited, &proc)
-      unless visited[node.data]
-        yield(node) if block_given?
-        visited[node.data] = true
-        node.neighbours.each do |next_node| 
-          search(next_node, visited, &proc) 
-        end
+  def depth_first_search(node, visited, &proc)
+    unless visited[node.data]
+      yield(node) if block_given?
+      visited[node.data] = true
+      node.neighbours.each do |next_node| 
+        depth_first_search(next_node, visited, &proc) 
       end
     end
+  end
+
+  def connected_components
     visited = Array.new(vertices.size, false)
-    search(vertices[start], visited, &proc)
+    components = []
+    (0...visited.length).each do |i|
+      unless visited[i]
+        component = []
+        depth_first_search(vertices[i], visited) do |node|
+          visited[node.data] = true
+          component << node.data
+        end
+        components << component
+      end
+    end
+    components
   end
 end
