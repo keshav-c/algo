@@ -4,7 +4,8 @@ class Peak
 
   def initialize(height, row, col)
     @height = height
-    @row, @col = row, col
+    @row = row
+    @col = col
     @neighbours = []
   end
 
