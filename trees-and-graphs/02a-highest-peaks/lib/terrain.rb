@@ -24,11 +24,11 @@ class Terrain
   def controlling_peak(peak)
     ctrl = nil
     peak.neighbours.each do |nebr|
-      if nebr.height > peak.height
+      if nebr > peak
         if ctrl.nil?
           ctrl = nebr
         else
-          ctrl = nebr if nebr.height > ctrl.height
+          ctrl = nebr if nebr > ctrl
         end
       end
     end

@@ -12,7 +12,7 @@ class Peak
     neighbours << peak unless neighbours.include? peak
   end
 
-  def to_s
-    "height: #{height}; Pos: [#{row}, #{col}]"
+  def >(other)
+    height > other.height
   end
 end
