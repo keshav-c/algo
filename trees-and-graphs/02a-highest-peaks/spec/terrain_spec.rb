@@ -2,9 +2,7 @@ require './lib/terrain'
 
 RSpec.describe Terrain do
   def peak_heights(peaks)
-    res = []
-    peaks.each { |peak| res << peak.height }
-    res
+    peaks.map(&:height)
   end
 
   def controlled_peaks(terrain, x, y)
