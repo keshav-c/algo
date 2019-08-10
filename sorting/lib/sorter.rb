@@ -76,4 +76,28 @@ class Sorter
     right = simple_quicksort(right)
     sorted = left + [pivot] + right
   end
+
+  def Sorter.advanced_quicksort(array, s=0, e = array.length - 1)
+    if s < e
+      pivot_index = partition(array, s, e)
+      advanced_quicksort(array, s, pivot_index - 1)
+      advanced_quicksort(array, pivot_index + 1, e)
+    end
+    array
+  end
+
+  private
+    def Sorter.partition(array, s, e)
+      swap_index = s
+      i = s
+      while i < e
+        if array[i] <= array[e]
+          array[i], array[swap_index] = array[swap_index], array[i]
+          swap_index += 1
+        end
+          i += 1
+      end
+      array[swap_index], array[e] = array[e], array[swap_index]
+      swap_index
+    end
 end
