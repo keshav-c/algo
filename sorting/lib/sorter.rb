@@ -44,7 +44,7 @@ class Sorter
     num_shifts
   end
 
-  def full_counting_sort(array)
+  def Sorter.full_counting_sort(array)
     num = array.map { |el| el[/\d+/].to_i }
     data = array.map { |el| el[/[a-zA-Z]+/] }
     num_frequencies = Array.new(100, 0)
@@ -65,5 +65,15 @@ class Sorter
       starting_pos[n] += 1
     end
     sorted
+  end
+
+  def Sorter.simple_quicksort(array)
+    return array if array.length <= 1
+    pivot = array.first
+    left = array[1..-1].select { |el| el <= pivot }
+    left = simple_quicksort(left)
+    right = array[1..-1].select { |el| el > pivot }
+    right = simple_quicksort(right)
+    sorted = left + [pivot] + right
   end
 end
