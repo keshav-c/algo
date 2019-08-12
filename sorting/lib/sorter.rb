@@ -26,7 +26,7 @@ class Sorter
     array
   end
 
-  def Sorter.running_time(array)
+  def Sorter.insertion_sort_running_time(array)
     num_shifts = 0
     index_sorted_upto = 0
     while index_sorted_upto < array.length - 1
@@ -86,6 +86,13 @@ class Sorter
     array
   end
 
+  def Sorter.quicksort_running_time(array)
+    quicksort(array)
+    num_swaps = swap_count
+    # self.swap_count = 0 # make swap count instance variable
+    {sorted: array, swaps: num_swaps}
+  end
+
   private
     def Sorter.partition(array, s, e)
       swap_index = s
@@ -93,11 +100,13 @@ class Sorter
       while i < e
         if array[i] <= array[e]
           array[i], array[swap_index] = array[swap_index], array[i]
+          # self.swap_count += 1 # use swap_count instance variable to keep track of running time
           swap_index += 1
         end
           i += 1
       end
       array[swap_index], array[e] = array[e], array[swap_index]
+      # self.swap_count += 1 # for running time
       swap_index
     end
 end
