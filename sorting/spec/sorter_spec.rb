@@ -86,4 +86,11 @@ RSpec.describe Sorter do
       expect(Sorter.is_sorted_asc? Sorter.advanced_quicksort(array)).to eql true
     end
   end
+
+  context "#merge_sort" do
+    it "Sorts 20 element array in order" do
+      array = ["0 ab", "6 cd", "0 ef", "6 gh", "4 ij", "0 ab", "6 cd", "0 ef", "6 gh", "0 ij", "4 that", "3 be", "0 to", "1 be", "5 question", "1 or", "2 not", "4 is", "2 to", "4 the"]
+      expect(full_merge_sort(array)).to eql ["ab", "ef", "ab", "ef", "ij", "to", "be", "or", "not", "to", "be", "ij", "that", "is", "the", "question", "cd", "gh", "cd", "gh"]
+    end
+  end
 end

@@ -93,6 +93,34 @@ class Sorter
     {sorted: array, swaps: num_swaps}
   end
 
+  def merge_sort(array)
+    len = array.length
+    if len == 1
+      sorted = array
+    else
+      left, right = [array[0...(len/2).ceil], array[(len/2).ceil..-1]]
+      left = merge_sort(left)
+      right = merge_sort(right)
+      sorted = []
+      until left.empty? || right.empty?
+        lnum = left.first[/\d+/].to_i
+        rnum = right.first[/\d+/].to_i
+        smaller = lnum <= rnum ? left.shift : right.shift
+        sorted << smaller
+      end
+      sorted.concat(left, right)
+    end
+  end
+  
+  def extract_data(array)
+    array.map { |element| element[/[a-zA-Z]+/] }
+  end
+  
+  def full_merge_sort(array)
+    array = merge_sort(array)
+    extract_data(array)
+  end
+
   private
     def Sorter.partition(array, s, e)
       swap_index = s
