@@ -101,15 +101,23 @@ class Sorter
       left, right = [array[0...(len/2).ceil], array[(len/2).ceil..-1]]
       left = merge_sort(left)
       right = merge_sort(right)
-      sorted = []
-      until left.empty? || right.empty?
-        lnum = left.first[/\d+/].to_i
-        rnum = right.first[/\d+/].to_i
-        smaller = lnum <= rnum ? left.shift : right.shift
-        sorted << smaller
-      end
-      sorted.concat(left, right)
+      merge(left, right)
     end
+  end
+
+  def merge(array1, array2)
+    combined = []
+    until array1.empty? || array2.empty?
+      index1 = get_index array1.first
+      index2 = get_index array2.first
+      item_to_insert = index1 <= index2 ? array1.shift : array2.shift
+      combined << item_to_insert
+    end
+    combined.concat(array1, array2)
+  end
+
+  def get_index(obj)
+    obj[/\d+/].to_i
   end
   
   def extract_data(array)
