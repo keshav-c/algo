@@ -96,7 +96,7 @@ class Sorter
   def merge_sort(array)
     len = array.length
     if len == 1
-      sorted = array
+      array
     else
       left, right = [array[0...(len/2).ceil], array[(len/2).ceil..-1]]
       left = merge_sort(left)
